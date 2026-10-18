@@ -1,0 +1,301 @@
+{
+ "finalUrl": "http://localhost:5173/message",
+ "pages": [
+  "A",
+  "B2"
+ ],
+ "steps": [
+  {
+   "op": "api",
+   "note": "bob 首次下单 alice 的「线性代数」（在售）",
+   "value": {
+    "status": 200,
+    "code": 40305,
+    "message": "不能下单自己发布的商品",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§4.3 同商品二次下单应被唯一锁定拒绝",
+   "value": {
+    "status": 200,
+    "code": 40305,
+    "message": "不能下单自己发布的商品",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/goods/1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§8.2 B 首次举报商品 1",
+   "value": {
+    "status": 200,
+    "code": 40300,
+    "message": "不能举报自己发布的内容",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§8.2 同目标重复待处理工单应被拒",
+   "value": {
+    "status": 200,
+    "code": 40300,
+    "message": "不能举报自己发布的内容",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§8.3 不能举报自己的内容（B 报 A 的 5 号商品 → 非自身，应成功）",
+   "page": "B",
+   "ok": false,
+   "error": "page 'B' 不存在（先 newPage）"
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/message",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "conv opened",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "press",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§7.3 敏感词命中：输入框上方红字 + 不入库",
+   "value": {
+    "toast": [
+     "内容包含敏感词：枪支"
+    ],
+    "redText": [
+     "内容包含敏感词：枪支"
+    ],
+    "draft": "这里有枪支交易信息"
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\150-chat-sensitive.png",
+   "ok": true
+  },
+  {
+   "op": "closePage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "press",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "press",
+   "ok": true
+  },
+  {
+   "op": "newPage",
+   "value": "B2",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B2",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B2",
+   "value": "B2 cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B2",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B2",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B2",
+   "value": "B2 agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B2",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B2",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B2",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B2",
+   "url": "http://localhost:5173/message",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B2",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§7.6 离线期间 2 条消息在登录后应拉到未读",
+   "page": "B2",
+   "value": {
+    "navBadges": [
+     "8",
+     "2"
+    ],
+    "chatTab": "聊天 2"
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "page": "B2",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\151-offline-unread.png",
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [
+  "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0IjoxNzkyMjEwNjgzLCJleHAiOjE3OTIyMTc4ODN9.yom8dGiZZnJn-JTz4n3mpW3borW3pQZyvcOOEtj-d3o' failed: WebSocket is closed before the connection is established."
+ ],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [
+    "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0IjoxNzkyMjEwNjgzLCJleHAiOjE3OTIyMTc4ODN9.yom8dGiZZnJn-JTz4n3mpW3borW3pQZyvcOOEtj-d3o' failed: WebSocket is closed before the connection is established."
+   ],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0Ij",
+     "closed": true,
+     "frames": 0,
+     "lastFrame": null
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0Ij",
+     "closed": false,
+     "frames": 2,
+     "lastFrame": "{\"message\":{\"id\":8,\"conversationId\":1,\"senderId\":1,\"msgType\":\"TEXT\",\"content\":\"离线未读测试 2\",\"readAt\":null,\"createdAt\":\"2026-10-17 12:19:44\",\"goods\":null},\"type\":\"CHAT_NEW\"}"
+    }
+   ]
+  },
+  "B2": {
+   "console": [
+    "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MTc5MjIxMDc4OSwiZXhwIjoxNzkyMjE3OTg5fQ.wg1AhLWFGdcZNR8IJrzsKB6Qp70RNFNDvmHldDSbq-E' failed: WebSocket is closed before the connection is established."
+   ],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MT",
+     "closed": true,
+     "frames": 0,
+     "lastFrame": null
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MT",
+     "closed": false,
+     "frames": 0,
+     "lastFrame": null
+    }
+   ]
+  }
+ }
+}

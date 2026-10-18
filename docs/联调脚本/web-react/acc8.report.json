@@ -1,0 +1,346 @@
+{
+ "finalUrl": "http://localhost:5173/orders/4",
+ "pages": [
+  "A",
+  "B"
+ ],
+ "steps": [
+  {
+   "op": "api",
+   "note": "卖方（stu_react02）确认前信用分",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 7,
+     "nickname": "React 验收同学",
+     "avatar": null,
+     "college": null,
+     "bio": null,
+     "creditScore": 100,
+     "creditLevel": "良好",
+     "authStatus": 1,
+     "status": 0,
+     "banReason": null,
+     "bannedUntil": null,
+     "onSaleCount": 0,
+     "studentNoMasked": "202****99",
+     "campusEmailMasked": "20****@stu.example.edu.cn",
+     "createdAt": "2026-10-17 12:21:13"
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "status": "待面交",
+    "swapConfirm": "买方（发起方）确认收货： 待确认 卖方（帖主）确认收货： 待确认 面交请在公共场所当面验货，确认无误后再点击确认，保障双方信用（PRD §5.",
+    "buttons": [
+     "确认收货"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\171-swap-order-before.png",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "确认完成交易 请务必当面确认收到物品后再点击确认。 取消 确认",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§6.5 单方确认后仍为待面交，仅本方时间线打点",
+   "value": {
+    "toast": [
+     "操作成功"
+    ],
+    "status": "待面交",
+    "swapConfirm": "买方（发起方）确认收货： 待确认 卖方（帖主）确认收货： 已确认 2026-10-17 12:23:20 面交请在公共场所当面验货，确认无误后再点击确认，保障双方信用（PRD §5."
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "单方确认后信用分应未变",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 7,
+     "nickname": "React 验收同学",
+     "avatar": null,
+     "college": null,
+     "bio": null,
+     "creditScore": 100,
+     "creditLevel": "良好",
+     "authStatus": 1,
+     "status": 0,
+     "banReason": null,
+     "bannedUntil": null,
+     "onSaleCount": 0,
+     "studentNoMasked": "202****99",
+     "campusEmailMasked": "20****@stu.example.edu.cn",
+     "createdAt": "2026-10-17 12:21:13"
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\172-swap-one-confirmed.png",
+   "ok": true
+  },
+  {
+   "op": "newPage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "买方确认前信用分",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 2,
+     "nickname": "鲍勃",
+     "avatar": null,
+     "college": "外国语学院",
+     "bio": "常年收数码",
+     "creditScore": 80,
+     "creditLevel": "良好",
+     "authStatus": 1,
+     "status": 0,
+     "banReason": null,
+     "bannedUntil": null,
+     "onSaleCount": 0,
+     "studentNoMasked": "202****02",
+     "campusEmailMasked": "bo****@stu.example.edu.cn",
+     "createdAt": "2026-09-26 15:03:01"
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/orders/4",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§6.6 双方都确认 → 已完成",
+   "page": "B",
+   "value": {
+    "toast": [
+     "操作成功"
+    ],
+    "status": "已完成",
+    "swapConfirm": "买方（发起方）确认收货： 已确认 2026-10-17 12:23:33 卖方（帖主）确认收货： 已确认 2026-10-17 12:23:20 商品信息 该订单类型（交换）不关联具体商品 交易双方 鲍 鲍勃 信用 良好 R React 验收",
+    "review": true
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "page": "B",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\173-swap-completed.png",
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "买方确认后信用分应 +2",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 2,
+     "nickname": "鲍勃",
+     "avatar": null,
+     "college": "外国语学院",
+     "bio": "常年收数码",
+     "creditScore": 82,
+     "creditLevel": "良好",
+     "authStatus": 1,
+     "status": 0,
+     "banReason": null,
+     "bannedUntil": null,
+     "onSaleCount": 0,
+     "studentNoMasked": "202****02",
+     "campusEmailMasked": "bo****@stu.example.edu.cn",
+     "createdAt": "2026-09-26 15:03:01"
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "卖方信用分也应 +2",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 7,
+     "nickname": "React 验收同学",
+     "avatar": null,
+     "college": null,
+     "bio": null,
+     "creditScore": 102,
+     "creditLevel": "良好",
+     "authStatus": 1,
+     "status": 0,
+     "banReason": null,
+     "bannedUntil": null,
+     "onSaleCount": 0,
+     "studentNoMasked": "202****99",
+     "campusEmailMasked": "20****@stu.example.edu.cn",
+     "createdAt": "2026-10-17 12:21:13"
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  },
+  "B": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  }
+ }
+}

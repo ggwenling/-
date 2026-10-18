@@ -1,0 +1,228 @@
+{
+ "finalUrl": "http://localhost:5173/goods/1",
+ "pages": [
+  "A"
+ ],
+ "steps": [
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/verify",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "url": "/verify",
+    "hasCodeInput": true
+   },
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/profile",
+   "ok": true
+  },
+  {
+   "op": "url",
+   "value": "http://localhost:5173/profile",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§2.4 认证成功后个人中心出现已认证徽章",
+   "value": {
+    "toast": [
+     "校园认证通过！"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\162-verified-profile.png",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§3.3 未传图应先被拦（请至少上传 1 张商品图片）",
+   "value": {
+    "toast": [
+     "请至少上传 1 张商品图片"
+    ],
+    "url": "/publish"
+   },
+   "ok": true
+  },
+  {
+   "op": "upload",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/publish",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§3.2 敏感词应被拒（40001）",
+   "value": {
+    "toast": [
+     "标题包含敏感词：枪支"
+    ],
+    "url": "/publish",
+    "fieldError": []
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\163-publish-sensitive.png",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§9.2 新用户（无行为）走热门兜底",
+   "value": {
+    "guestLike": [
+     "逛逛校园里的好东西",
+     "猜你喜欢",
+     "最新发布"
+    ],
+    "cards": 0,
+    "hotRank": 0
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\164-home-newuser.png",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/goods/1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§9.4 相似推荐排除自身",
+   "value": {
+    "similar": "相似推荐 交易中 线性代数（同济版） ¥18.00 几乎全新 1 1 10-16",
+    "selfExcluded": true
+   },
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  }
+ }
+}

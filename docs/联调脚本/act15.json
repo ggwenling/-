@@ -1,0 +1,38 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/user", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr => Array.from(tr.querySelectorAll('td')).slice(1,8).map(td=>td.innerText.trim()).join(' | ') + ' || ' + Array.from(tr.querySelectorAll('button')).map(b=>b.innerText.trim()).join(','))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/39-user-after.png", "full": true },
+
+  { "op": "clickRowBtn", "rowText": "stu_alice", "btn": "详情", "after": 1500 },
+  { "op": "dialogText" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/40-user-detail.png" },
+  { "op": "click", "role": "button", "name": "2", "after": 1500 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] .dashed-card')).map(d=>d.innerText.replace(/\\s+/g,' ').slice(0,70))" },
+  { "op": "press", "key": "Escape", "after": 800 },
+
+  { "op": "clickRowBtn", "rowText": "stu_dave", "btn": "封禁", "after": 900 },
+  { "op": "pickOption", "trigger": "[role=dialog] [role=combobox]", "name": "封禁 7 天", "after": 400 },
+  { "op": "dialogFill", "sel": "textarea", "value": "联调测试：发布违规内容" },
+  { "op": "dialogBtn", "name": "确认封禁", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('stu_dave')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "stu_carol", "btn": "解封", "after": 900 },
+  { "op": "dialogBtn", "name": "确认解封", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('stu_carol')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "stu_alice", "btn": "信用", "after": 900 },
+  { "op": "dialogText" },
+  { "op": "dialogFill", "sel": "input[type=number]", "value": "5" },
+  { "op": "dialogFill", "sel": "textarea", "value": "联调测试：活动奖励加分" },
+  { "op": "dialogBtn", "name": "确认调整", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('stu_alice')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "stu_alice", "btn": "详情", "after": 1500 },
+  { "op": "eval", "js": "({total: (document.querySelector('[role=dialog]')||{}).innerText.match(/共 (\\d+) 条/)?.[0], first: (document.querySelector('[role=dialog] .dashed-card')||{}).innerText.replace(/\\s+/g,' ').slice(0,80)})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/41-user-credit-after.png" },
+  { "op": "console" }
+]

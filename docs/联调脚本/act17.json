@@ -1,0 +1,13 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/user" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "url" },
+  { "op": "toasts" },
+  { "op": "bodyText", "max": 260 },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/47-operator-forbidden-toast.png", "full": true },
+  { "op": "goto", "url": "http://localhost:5174/dashboard" },
+  { "op": "wait", "ms": 1800 },
+  { "op": "url" },
+  { "op": "visible", "text": "数据大屏" },
+  { "op": "console" }
+]

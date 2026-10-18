@@ -1,0 +1,35 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/report", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.textContent.replace(/\\s+/g,'|').slice(0,80))" },
+
+  { "op": "clickRowBtn", "rowText": "商品#1", "btn": "详情", "after": 1500 },
+  { "op": "dialogText" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('img')).map(i=>({src:(i.getAttribute('src')||'').slice(0,50), w:i.naturalWidth, h:i.naturalHeight}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/24-report-detail-images.png" },
+  { "op": "press", "key": "Escape", "after": 900 },
+
+  { "op": "clickRowBtn", "rowText": "用户#2", "btn": "处置", "after": 1100 },
+  { "op": "dialogText" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] [role=checkbox]')).map(b=>({checked:b.getAttribute('aria-checked'), disabled:b.getAttribute('aria-disabled')||b.disabled, label:(b.closest('label')||b.parentElement).innerText.trim().slice(0,20)}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/25-report-handle-user-target.png" },
+
+  { "op": "click", "sel": "[role=dialog] label:has-text('警告')", "after": 400 },
+  { "op": "click", "sel": "[role=dialog] label:has-text('扣信用分')", "after": 400 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] [role=checkbox]')).map(b=>({checked:b.getAttribute('aria-checked'), label:(b.closest('label')||b.parentElement).innerText.trim().slice(0,12)}))" },
+  { "op": "dialogFill", "sel": "textarea", "value": "联调测试：核实欺诈属实，警告并扣分" },
+  { "op": "dialogBtn", "name": "确认处置", "after": 2200 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,110))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/26-report-after-handle.png", "full": true },
+
+  { "op": "clickRowBtn", "rowText": "求购#1", "btn": "驳回", "after": 1100 },
+  { "op": "dialogText" },
+  { "op": "dialogBtn", "name": "继续", "after": 1100 },
+  { "op": "dialogText" },
+  { "op": "dialogFill", "value": "联调测试：证据不足，驳回" },
+  { "op": "dialogBtn", "name": "确认驳回", "after": 2200 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,110))" },
+  { "op": "console" }
+]

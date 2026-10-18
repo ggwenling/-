@@ -1,0 +1,358 @@
+{
+ "finalUrl": "http://localhost:5173/swap/3",
+ "pages": [
+  "A",
+  "B"
+ ],
+ "steps": [
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/swap/publish",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "whoami": "React 验收同学"
+   },
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/publish",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/publish",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/publish",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/publish",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "url",
+   "value": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "toast": [
+     "发布成功"
+    ],
+    "h2": "React 验收用交换帖：教材换耳机",
+    "diffTag": "ok",
+    "swapBlocks": [
+     "帖主的物品",
+     "想要的物品"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\170-swap-post.png",
+   "ok": true
+  },
+  {
+   "op": "newPage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "当前交换帖 id 由上一段 URL 推出",
+   "value": "/swap/3",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "h2": "React 验收用交换帖：教材换耳机",
+    "action": "我的操作 填写你的物品说明，也可以关联你在售的商品，帖主同意后即生成交换订单。 发起交换"
+   },
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "发起交换 物品说明 关联商品 可选：选择你在售的商品 关联后帖主可直接查看商品详情（仅展示在售商品） 取消 提交请求 关闭",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "toast": [
+     "交换请求已提交，等待帖主处理"
+    ],
+    "myRequest": "我的物品说明 我有一副全新有线耳机（未拆封），可以换你的教材。 状态 待处理"
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§6.3 重复发起 → 40916",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40916,
+    "message": "您已提交过交换请求，请等待对方处理",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "reqHeader": "收到的交换请求（1）",
+    "rows": [
+     "鲍 鲍勃 我有一副全新有线耳机（未拆封），可以换你的教材。 — 待处理 同意 拒绝"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "同意交换 同意「鲍勃」的交换请求？同意后将生成交换订单，其余请求自动关闭，双方确认完成即交易成功。 取消 同意并生成订单",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/swap/3",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "toast": [
+     "已同意，交换订单已生成"
+    ],
+    "rows": [
+     "鲍 鲍勃 我有一副全新有线耳机（未拆封），可以换你的教材。 — 已同意 查看订单"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "取 SWAP 订单 id",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "list": [
+      {
+       "id": 4,
+       "orderNo": "SH20261017000003",
+       "type": "SWAP",
+       "status": "SCHEDULED",
+       "goodsId": null,
+       "goodsTitle": "React 验收用交换帖：教材换耳机",
+       "goodsCoverUrl": null,
+       "amount": 20,
+       "buyerId": 2,
+       "sellerId": 7,
+       "viewRole": "seller",
+       "counterpartId": 2,
+       "counterpartNickname": "鲍勃",
+       "counterpartAvatar": null,
+       "counterpartCreditScore": 80,
+       "hasReviewedByMe": false,
+       "canConfirm": false,
+       "canReject": false,
+       "canCancel": false,
+       "canComplete": true,
+       "canReview": false,
+       "createdAt": "2026-10-17 12:22:56",
+       "completedAt": null,
+       "cancelledAt": null
+      }
+     ],
+     "total": 1,
+     "pageNum": 1,
+     "pageSize": 10
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  },
+  "B": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  }
+ }
+}

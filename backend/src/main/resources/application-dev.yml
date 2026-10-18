@@ -1,0 +1,25 @@
+# 开发/演示环境配置：数据库与 Redis 均指向本机
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/campus_secondhand?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}   # 本机 MySQL 密码，可用环境变量 MYSQL_PASSWORD 覆盖
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开发期打印 SQL
+
+logging:
+  level:
+    com.campus.market: debug
+
+app:
+  jwt:
+    # 仅开发/演示环境默认密钥（≥32 字符）；不得用于任何真实部署
+    secret: ${JWT_SECRET:dev-only-secret-key-please-override-0123456789}

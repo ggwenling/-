@@ -1,0 +1,466 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * 校园二手交易系统 · 前台商城 —— 新复古学院风（Vintage Campus / 纸质布告栏）
+ * 与 frontend-admin 共用同一套设计令牌，保证两个应用像同一个系统：
+ *   主色 = 复古森林绿；纸底 = 暖米白；高亮 = 姜黄 / 橘红；点缀 = 常春藤蓝 / 砖红 / 图章棕。
+ * 前台特有的纸感扩展：拍立得商品卡、布告栏网格底、优惠券虚线、胶带贴纸、图章徽标。
+ * 装饰只用于容器/标签/空态/落地页；表格与表单正文保持中性高对比。
+ */
+:root {
+  --radius: 0.875rem; /* 14px */
+
+  /* —— shadcn 语义令牌（纸感版，与后台一致）—— */
+  --background: #f7f2e9; /* 暖米白纸底 */
+  --foreground: #253028; /* 墨绿黑正文 */
+  --card: #fffcf5; /* 纸白 */
+  --card-foreground: #253028;
+  --popover: #fffcf5;
+  --popover-foreground: #253028;
+  --primary: #2e5b4e; /* 复古森林绿 */
+  --primary-foreground: #fbf7ef;
+  --secondary: #ece4d4;
+  --secondary-foreground: #2e5b4e;
+  --muted: #efe9db;
+  --muted-foreground: #6e7a70;
+  --accent: #d89a3c; /* 姜黄 */
+  --accent-foreground: #3a2a12;
+  --destructive: #b4443a; /* 砖红 */
+  --destructive-foreground: #fbf7ef;
+  --border: #e4dbc9;
+  --input: #ded3bd;
+  --ring: #2e5b4e;
+
+  /* —— 品牌扩展色 —— */
+  --ginger: #d89a3c;
+  --terracotta: #c25e3a; /* 价格橘红 */
+  --navy: #2a3f5c; /* 常春藤蓝 */
+  --success: #3f7d5c;
+  --warning: #c88a2e;
+  --info: #2a3f5c;
+  --stamp: #8a5a2b; /* 图章棕 */
+  --tape: rgba(216, 154, 60, 0.28);
+  --ink: #253028;
+
+  /* —— 路由过场 —— */
+  --vt-duration: 260ms;
+  --vt-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ginger: var(--ginger);
+  --color-terracotta: var(--terracotta);
+  --color-navy: var(--navy);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-stamp: var(--stamp);
+  --color-ink: var(--ink);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* 字体：系统字体栈优先（不依赖任何外网 CDN）。
+     AlibabaPuHuiTi-3 名字保留在最前，日后放入真实字体文件即自动生效。 */
+  --font-sans:
+    'AlibabaPuHuiTi-3', 'AlibabaPuHuiTi', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei',
+    'Segoe UI', system-ui, sans-serif;
+
+  --shadow-paper: 0 1px 0 rgba(58, 42, 18, 0.04), 0 8px 20px -12px rgba(46, 91, 78, 0.22);
+  --shadow-lift: 0 10px 26px -14px rgba(46, 91, 78, 0.4);
+  --shadow-polaroid: 0 2px 6px rgba(58, 42, 18, 0.08), 0 14px 28px -18px rgba(46, 91, 78, 0.45);
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.3s ease both;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-kenburns: kenburns 26s ease-in-out infinite alternate;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 落地页校园图的缓慢漂移（替代视频背景） */
+@keyframes kenburns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* 极淡的纸面颗粒，避免纯色扁平感 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: rgba(216, 154, 60, 0.35);
+  }
+
+  /* 纸感滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d9cfb8;
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c7b99b;
+    background-clip: content-box;
+  }
+
+  /* a11y：焦点环 */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ——— 与管理端共用的纸感工具类 ——— */
+
+  /* 纸感卡 */
+  .paper-card {
+    @apply relative rounded-[var(--radius)] border border-border bg-card;
+    box-shadow: var(--shadow-paper);
+  }
+
+  /* 右下折角（布告/优惠券质感） */
+  .paper-fold::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 22px;
+    height: 22px;
+    border-bottom-right-radius: var(--radius);
+    background: linear-gradient(135deg, transparent 50%, rgba(46, 91, 78, 0.12) 50%);
+    pointer-events: none;
+  }
+
+  /* 虚线布告卡 */
+  .dashed-card {
+    @apply rounded-[var(--radius)] border border-dashed border-[#d8cbb0] bg-card/70;
+  }
+
+  /* 胶带标签 */
+  .tape-tag {
+    @apply inline-flex items-center gap-1 rounded-[3px] px-2 py-0.5 text-[11px] font-semibold;
+    color: #6b4a15;
+    background: var(--tape);
+    box-shadow: 0 1px 0 rgba(58, 42, 18, 0.08);
+  }
+
+  /* 图章徽标 */
+  .stamp-badge {
+    @apply inline-flex items-center gap-1 rounded-md border border-dashed px-2 py-0.5 text-[11px] font-semibold tracking-wider;
+    color: var(--stamp);
+    border-color: rgba(138, 90, 43, 0.45);
+    transform: rotate(-1.5deg);
+  }
+
+  /* 顶栏毛玻璃 */
+  .topbar-blur {
+    background: rgba(255, 252, 245, 0.82);
+    backdrop-filter: saturate(1.2) blur(10px);
+  }
+
+  /* ——— 前台特有的纸感扩展 ——— */
+
+  /* 拍立得商品卡：白边 + 底部留白 + 轻微旋转（hover 回正） */
+  .polaroid-card {
+    @apply relative rounded-[6px] bg-card p-2 pb-3 transition-transform duration-300;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-polaroid);
+  }
+  .polaroid-card:hover {
+    transform: translateY(-4px) rotate(0deg);
+  }
+
+  /* 布告栏/软木板底纹（极淡细网格） */
+  .notice-board {
+    background-image:
+      linear-gradient(rgba(46, 91, 78, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46, 91, 78, 0.045) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* 优惠券虚线（左右各一个内凹缺口） */
+  .coupon-card {
+    @apply relative rounded-[var(--radius)] border border-dashed border-[#d8cbb0] bg-card;
+  }
+  .coupon-card::before,
+  .coupon-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    border-radius: 999px;
+    background: var(--background);
+    border: 1px dashed #d8cbb0;
+  }
+  .coupon-card::before {
+    left: -8px;
+    border-right-color: transparent;
+  }
+  .coupon-card::after {
+    right: -8px;
+    border-left-color: transparent;
+  }
+
+  /* 落地页/首页 hero：校园图 + 双层遮罩（左侧重 + 下方重），保证文字可读 */
+  .landing-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(6, 13, 9, 0.78) 0%,
+        rgba(6, 13, 9, 0.5) 38%,
+        rgba(6, 13, 9, 0.12) 70%,
+        transparent 100%
+      ),
+      linear-gradient(180deg, rgba(6, 13, 9, 0.42) 0%, rgba(6, 13, 9, 0.12) 45%, rgba(6, 13, 9, 0.7) 100%);
+  }
+
+  /* 正文页容器（与旧版 .page 的观感一致：1200 居中 + 上下留白） */
+  .page {
+    @apply mx-auto w-full max-w-[1200px] px-5 pt-7 pb-12;
+  }
+  .page-title {
+    @apply mb-4 text-[22px] font-semibold text-foreground;
+  }
+
+  /* —— 首页（Stitch 原型版式）专用：只作用于 /home，不影响落地页与其它页 —— */
+
+  /* 首页 hero 轮播遮罩：左侧重（保文案可读）+ 下方重（托住指示点），色相沿用品牌深绿。
+     第 3/4 张图自带浅色英文排版区，单靠加深只会变成"灰色底 + 隐约单词"，所以左半边额外加一层
+     渐变蒙版磨砂（backdrop-filter + mask-image）：残影被模糊成色块，中文文案仍然清晰。 */
+  .home-hero-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(24, 46, 39, 0.9) 0%,
+        rgba(24, 46, 39, 0.72) 44%,
+        rgba(24, 46, 39, 0.32) 72%,
+        rgba(24, 46, 39, 0.04) 92%,
+        transparent 100%
+      ),
+      linear-gradient(180deg, rgba(24, 46, 39, 0.4) 0%, rgba(24, 46, 39, 0.08) 45%, rgba(24, 46, 39, 0.68) 100%);
+  }
+
+  .home-hero-scrim::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(16px) saturate(0.9);
+    -webkit-backdrop-filter: blur(16px) saturate(0.9);
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 52%, transparent 72%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 52%, transparent 72%);
+  }
+
+  /* 首页侧栏「校园公告」卡：姜黄→暖橘极淡渐变底 */
+  .home-notice-card {
+    background-image: linear-gradient(
+      135deg,
+      rgba(216, 154, 60, 0.16) 0%,
+      rgba(216, 154, 60, 0.07) 52%,
+      rgba(194, 94, 58, 0.1) 100%
+    );
+  }
+
+  /* —— 路由过场（View Transitions）挂点 ——
+     `.route-page` 覆盖「内容主体」，`.topbar-hold` 覆盖固定顶栏：
+     只有前者参与补间，顶栏与根快照保持静止，避免整屏闪烁。 */
+  .route-page {
+    view-transition-name: page;
+  }
+  .topbar-hold {
+    view-transition-name: topbar;
+  }
+}
+
+/* ==========================================================================
+ * 路由过场：View Transitions API
+ * - 只有 pathname 变化才启用（见 components/RouteLink.tsx），同页筛选/分页不走这里
+ * - 顶栏与根冻结；只有 page 组做「旧页淡出上移 → 新页淡入上浮」
+ * - 浏览器不支持时由下方 @supports not 分支的入场动画兜底
+ * ========================================================================== */
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vt-in-back {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vt-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.995);
+  }
+}
+
+@keyframes vt-out-back {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-group(page) {
+  animation-duration: var(--vt-duration);
+}
+
+::view-transition-old(page) {
+  animation: vt-out var(--vt-duration) var(--vt-ease) both;
+}
+
+::view-transition-new(page) {
+  animation: vt-in var(--vt-duration) var(--vt-ease) both;
+}
+
+/* 前进/后退方向感：POP 时新页从上方压下来 */
+html[data-nav='pop']::view-transition-old(page) {
+  animation-name: vt-out-back;
+}
+
+html[data-nav='pop']::view-transition-new(page) {
+  animation-name: vt-in-back;
+}
+
+/* 顶栏自己成组并冻结，跨页时位置纹丝不动 */
+::view-transition-group(topbar),
+::view-transition-old(topbar),
+::view-transition-new(topbar) {
+  animation: none;
+}
+
+/* 降级：不支持 View Transitions 的浏览器只做「到达」动画（同一个 keyframes） */
+@supports not (view-transition-name: none) {
+  .route-fallback {
+    animation: vt-in var(--vt-duration) var(--vt-ease) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+    animation-duration: 0s !important;
+  }
+
+  .route-fallback {
+    animation: none !important;
+  }
+}

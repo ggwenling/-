@@ -1,0 +1,43 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/sensitive-word", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "eval", "js": "({rows: document.querySelectorAll('table tbody tr').length, first: (document.querySelector('table tbody tr')||{}).innerText, pager: (document.querySelector('.mt-4.flex.flex-wrap')||{}).innerText})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/36-sensitive-words.png", "full": true },
+
+  { "op": "fill", "placeholder": "按敏感词筛选", "value": "代写" },
+  { "op": "click", "role": "button", "name": "查询", "after": 1500 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "click", "role": "button", "name": "重置", "after": 1500 },
+  { "op": "click", "role": "button", "name": "2", "after": 1500 },
+  { "op": "eval", "js": "({firstRow: (document.querySelector('table tbody tr')||{}).innerText.replace(/\\s+/g,' ')})" },
+
+  { "op": "fill", "placeholder": "输入敏感词后回车或点击添加", "value": "联调敏感词A" },
+  { "op": "click", "role": "button", "name": "添加", "after": 1800 },
+  { "op": "toasts" },
+
+  { "op": "click", "role": "button", "name": "批量导入", "after": 900 },
+  { "op": "dialogFill", "sel": "textarea", "value": "刷单, 代写论文, 联调敏感词B、联调敏感词C" },
+  { "op": "dialogBtn", "name": "开始导入", "after": 2200 },
+  { "op": "toasts" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/37-sensitive-import.png" },
+  { "op": "fill", "placeholder": "按敏感词筛选", "value": "联调" },
+  { "op": "click", "role": "button", "name": "查询", "after": 1500 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调敏感词A", "btn": "删除", "after": 900 },
+  { "op": "dialogBtn", "name": "确认删除", "after": 1800 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "goto", "url": "http://localhost:5174/log", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "table" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/38-log-list.png", "full": true },
+  { "op": "pickOption", "trigger": "button[role=combobox], [role=combobox]", "name": "REPORT_HANDLE", "after": 1500 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,140))" },
+  { "op": "fill", "placeholder": "管理员 ID", "value": "1" },
+  { "op": "click", "role": "button", "name": "查询", "after": 1500 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,140))" },
+  { "op": "console" }
+]

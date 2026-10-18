@@ -1,0 +1,38 @@
+[
+  { "op": "goto", "url": "http://localhost:5173/verify" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "eval", "js": "({url: location.pathname, hasCodeInput: !!document.querySelector('[data-testid=verify-code]')})" },
+  { "op": "fill", "testid": "verify-student-no", "value": "20249999" },
+  { "op": "fill", "testid": "verify-email", "value": "20249999@stu.example.edu.cn" },
+  { "op": "fill", "testid": "verify-code", "value": "370269" },
+  { "op": "click", "role": "button", "name": "完成认证", "exact": true, "after": 3500 },
+  { "op": "url" },
+  { "op": "eval", "js": "({toast: Array.from(document.querySelectorAll('[data-sonner-toast]')).map(t=>t.innerText.trim()), badge: (document.querySelectorAll('.paper-card')[0]||{}).innerText?.match(/校园已认证|未认证/)?.[0], studentNo: (document.querySelectorAll('.paper-card')[0]||{}).innerText?.match(/202\\*+99|未认证/)?.[0]})", "note": "§2.4 认证成功后个人中心出现已认证徽章" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/162-verified-profile.png", "full": true },
+
+  { "op": "goto", "url": "http://localhost:5173/publish" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "click", "role": "button", "name": "选择二级分类", "after": 700 },
+  { "op": "click", "role": "button", "name": "教材书籍", "exact": true, "after": 500 },
+  { "op": "click", "role": "button", "name": "教材课本", "exact": true, "after": 700 },
+  { "op": "fill", "sel": "#title", "value": "枪支模型出售（敏感词探针）" },
+  { "op": "fill", "sel": "#description", "value": "用于验证发布链路的敏感词拦截，不应入库。" },
+  { "op": "fill", "sel": "#price", "value": "30" },
+  { "op": "click", "role": "button", "name": "发 布", "after": 2000 },
+  { "op": "eval", "js": "({toast: Array.from(document.querySelectorAll('[data-sonner-toast]')).map(t=>t.innerText.trim()), url: location.pathname})", "note": "§3.3 未传图应先被拦（请至少上传 1 张商品图片）" },
+
+  { "op": "upload", "sel": "input[type=file]", "files": ["C:/Users/31180/AppData/Local/Temp/dsh-xtxSWA/upload-test.png"] },
+  { "op": "wait", "ms": 3000 },
+  { "op": "click", "role": "button", "name": "发 布", "after": 3000 },
+  { "op": "eval", "js": "({toast: Array.from(document.querySelectorAll('[data-sonner-toast]')).map(t=>t.innerText.trim()), url: location.pathname, fieldError: Array.from(document.querySelectorAll('form p.text-destructive')).map(p=>p.innerText.trim())})", "note": "§3.2 敏感词应被拒（40001）" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/163-publish-sensitive.png", "full": true },
+
+  { "op": "goto", "url": "http://localhost:5173/home" },
+  { "op": "wait", "ms": 3000 },
+  { "op": "eval", "js": "({guestLike: Array.from(document.querySelectorAll('h2,h3')).map(h=>h.innerText.trim()).slice(0,8), cards: document.querySelectorAll('a[href^=\"/goods/\"]').length, hotRank: document.querySelectorAll('ol li').length})", "note": "§9.2 新用户（无行为）走热门兜底" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/164-home-newuser.png", "full": true },
+  { "op": "goto", "url": "http://localhost:5173/goods/1" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "eval", "js": "({similar: (document.querySelector('main')||{}).innerText?.match(/相似推荐[^]{0,120}/)?.[0]?.replace(/\\s+/g,' '), selfExcluded: !Array.from(document.querySelectorAll('main a[href=\"/goods/1\"]')).length})", "note": "§9.4 相似推荐排除自身" },
+  { "op": "console" }
+]

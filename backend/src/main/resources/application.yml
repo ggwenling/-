@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: campus-market
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 5MB       # 单张图片 ≤5MB（PRD §9.1）
+      max-request-size: 50MB   # 商品最多 9 张 + 表单
+  jackson:
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      # 删除策略：不物理删除，状态值软删（如 goods.status=DELETED）+ deleted_at 等元数据（数据库设计文档 v1.1 T4）
+
+springdoc:
+  api-docs:
+    enabled: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+app:
+  upload-dir: ./upload
+  demo-mode: true            # 演示模式：邮箱验证码打印到后端控制台，不依赖真实 SMTP（PRD §5.1）
+  auth:                      # 认证参数（PRD USR-02/03、§5.1）
+    email-whitelist: "@stu.example.edu.cn"   # 校园邮箱域名白名单（PRD §12.1）
+    code-ttl-minutes: 10     # 验证码有效期（分钟）
+    code-send-interval-seconds: 60
+    code-daily-limit: 10
+    login-fail-limit: 5      # 登录失败 N 次锁定
+    login-lock-minutes: 10
+  jwt:
+    access-token-minutes: 120   # accessToken 2h（PRD USR-02）
+    refresh-token-days: 7       # refreshToken 7d
+  credit:                    # 信用分规则常量（PRD §5.7，开发期可调，也可用环境变量覆盖）
+    initial-score: 100
+    max-score: 150
+    excellent-threshold: 120
+    good-threshold: 80
+    restricted-threshold: 60
+    order-complete-bonus: 2
+    violation-report-penalty: 10
+    order-timeout-penalty: 2
+    malicious-report-penalty: 5
+    ban-violation-count: 3

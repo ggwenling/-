@@ -1,0 +1,27 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/login", "waitFor": { "testid": "admin-login-username" } },
+  { "op": "fill", "testid": "admin-login-username", "value": "auditor01" },
+  { "op": "fill", "testid": "admin-login-password", "value": "Audit@2026new" },
+  { "op": "click", "role": "button", "name": "登 录", "after": 2500 },
+  { "op": "toasts" },
+  { "op": "url" },
+  { "op": "text", "sel": "nav", "max": 400 },
+
+  { "op": "goto", "url": "http://localhost:5174/user", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "eval", "js": "({stamp: (document.querySelector('.stamp-badge')||{}).innerText, creditButtons: Array.from(document.querySelectorAll('table tbody tr button')).filter(b=>b.innerText.trim()==='信用').map(b=>({disabled:b.disabled, title:b.getAttribute('title')})).slice(0,2), rows: Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,90))})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/49-auditor-user-readonly-credit.png", "full": true },
+
+  { "op": "goto", "url": "http://localhost:5174/content", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 800 },
+  { "op": "eval", "js": "({tabs: Array.from(document.querySelectorAll('[role=tab]')).map(t=>t.innerText), firstRow: (document.querySelector('table tbody tr')||{}).innerText.replace(/\\s+/g,' ')})" },
+
+  { "op": "goto", "url": "http://localhost:5174/sensitive-word", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 800 },
+  { "op": "eval", "js": "({rows: document.querySelectorAll('table tbody tr').length, pager: (document.querySelector('.mt-4.flex.flex-wrap')||{}).innerText.replace(/\\n/g,' ')})" },
+
+  { "op": "goto", "url": "http://localhost:5174/report", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 800 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,90))" },
+  { "op": "console" }
+]

@@ -1,0 +1,184 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * 校园二手交易系统 · 管理后台 —— 新复古学院风（Vintage Campus / 纸质布告栏）
+ * 主色：复古森林绿；辅色：暖米白纸底 + 姜黄/橘红高亮；大圆角；纸感/胶带/图章质感。
+ * 说明：纸感与装饰仅用于容器、标签与空态；表格/表单正文保持中性高对比，确保后台可读性。
+ */
+:root {
+  --radius: 0.875rem; /* 14px */
+
+  /* —— shadcn 语义令牌（纸感版）—— */
+  --background: #f7f2e9; /* 暖米白纸底 */
+  --foreground: #253028; /* 墨绿黑正文 */
+  --card: #fffcf5; /* 纸白 */
+  --card-foreground: #253028;
+  --popover: #fffcf5;
+  --popover-foreground: #253028;
+  --primary: #2e5b4e; /* 复古森林绿 */
+  --primary-foreground: #fbf7ef;
+  --secondary: #ece4d4;
+  --secondary-foreground: #2e5b4e;
+  --muted: #efe9db;
+  --muted-foreground: #6e7a70;
+  --accent: #d89a3c; /* 姜黄 */
+  --accent-foreground: #3a2a12;
+  --destructive: #b4443a; /* 砖红 */
+  --destructive-foreground: #fbf7ef;
+  --border: #e4dbc9;
+  --input: #ded3bd;
+  --ring: #2e5b4e;
+
+  /* —— 品牌扩展色 —— */
+  --ginger: #d89a3c;
+  --terracotta: #c25e3a; /* 价格橘红 */
+  --navy: #2a3f5c; /* 常春藤蓝 */
+  --success: #3f7d5c;
+  --warning: #c88a2e;
+  --info: #2a3f5c;
+  --stamp: #8a5a2b; /* 图章棕 */
+  --tape: rgba(216, 154, 60, 0.28);
+  --ink: #253028;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ginger: var(--ginger);
+  --color-terracotta: var(--terracotta);
+  --color-navy: var(--navy);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-stamp: var(--stamp);
+  --color-ink: var(--ink);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans:
+    'AlibabaPuHuiTi-3', 'AlibabaPuHuiTi', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei',
+    'Segoe UI', system-ui, sans-serif;
+
+  --shadow-paper: 0 1px 0 rgba(58, 42, 18, 0.04), 0 8px 20px -12px rgba(46, 91, 78, 0.22);
+  --shadow-lift: 0 10px 26px -14px rgba(46, 91, 78, 0.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* 极淡的纸面颗粒，避免纯色扁平感 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: rgba(216, 154, 60, 0.35);
+  }
+
+  /* 纸感滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d9cfb8;
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c7b99b;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  /* 纸感卡：暖色描边 + 柔和投影（可选折角） */
+  .paper-card {
+    @apply relative rounded-[var(--radius)] border border-border bg-card;
+    box-shadow: var(--shadow-paper);
+  }
+
+  /* 右下折角（布告/优惠券质感） */
+  .paper-fold::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 22px;
+    height: 22px;
+    border-bottom-right-radius: var(--radius);
+    background: linear-gradient(135deg, transparent 50%, rgba(46, 91, 78, 0.12) 50%);
+    pointer-events: none;
+  }
+
+  /* 虚线布告卡 */
+  .dashed-card {
+    @apply rounded-[var(--radius)] border border-dashed border-[#d8cbb0] bg-card/70;
+  }
+
+  /* 胶带标签 */
+  .tape-tag {
+    @apply inline-flex items-center gap-1 rounded-[3px] px-2 py-0.5 text-[11px] font-semibold;
+    color: #6b4a15;
+    background: var(--tape);
+    box-shadow: 0 1px 0 rgba(58, 42, 18, 0.08);
+  }
+
+  /* 图章徽标 */
+  .stamp-badge {
+    @apply inline-flex items-center gap-1 rounded-md border border-dashed px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider;
+    color: var(--stamp);
+    border-color: rgba(138, 90, 43, 0.45);
+    transform: rotate(-1.5deg);
+  }
+
+  /* 顶栏毛玻璃 */
+  .topbar-blur {
+    background: rgba(255, 252, 245, 0.82);
+    backdrop-filter: saturate(1.2) blur(10px);
+  }
+}

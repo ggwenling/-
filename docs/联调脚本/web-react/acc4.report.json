@@ -1,0 +1,310 @@
+{
+ "finalUrl": "http://localhost:5173/message",
+ "pages": [
+  "A",
+  "B"
+ ],
+ "steps": [
+  {
+   "op": "newPage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "bob 首次下单「线性代数」",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "id": 3,
+     "orderNo": "SH20261017000002",
+     "type": "SALE",
+     "status": "WAIT_CONFIRM",
+     "goodsId": 5,
+     "goodsTitle": "线性代数（同济版）",
+     "goodsCoverUrl": "/upload/202610/c762e84232ca4e5b8aabcb77d4efca35_thumb.png",
+     "amount": 18,
+     "buyerId": 2,
+     "sellerId": 1,
+     "viewRole": "buyer",
+     "counterpartId": 1,
+     "counterpartNickname": "爱丽丝",
+     "counterpartAvatar": "",
+     "counterpartCreditScore": 137,
+     "hasReviewedByMe": false,
+     "canConfirm": false,
+     "canReject": false,
+     "canCancel": true,
+     "canComplete": false,
+     "canReview": false,
+     "createdAt": "2026-10-17 12:20:15",
+     "completedAt": null,
+     "cancelledAt": null,
+     "confirmedAt": null,
+     "buyerConfirmedAt": null,
+     "sellerConfirmedAt": null,
+     "cancelledBy": null,
+     "cancelReason": null,
+     "seller": {
+      "id": 1,
+      "nickname": "爱丽丝",
+      "avatar": "",
+      "creditScore": 137,
+      "authStatus": 1
+     },
+     "buyer": {
+      "id": 2,
+      "nickname": "鲍勃",
+      "avatar": null,
+      "creditScore": 80,
+      "authStatus": 1
+     },
+     "reviews": []
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§4.3 二次下单应被商品唯一锁定拒绝",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40907,
+    "message": "商品当前不可下单",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§8.2 首次举报他人商品应成功",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40900,
+    "message": "您已举报过该对象，请等待处理",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§8.2 同目标重复待处理工单应被拒",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40900,
+    "message": "您已举报过该对象，请等待处理",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "bob 的买入订单",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "list": [
+      {
+       "id": 3,
+       "orderNo": "SH20261017000002",
+       "type": "SALE",
+       "status": "WAIT_CONFIRM",
+       "goodsId": 5,
+       "goodsTitle": "线性代数（同济版）",
+       "goodsCoverUrl": "/upload/202610/c762e84232ca4e5b8aabcb77d4efca35_thumb.png",
+       "amount": 18,
+       "buyerId": 2,
+       "sellerId": 1,
+       "viewRole": "buyer",
+       "counterpartId": 1,
+       "counterpartNickname": "爱丽丝",
+       "counterpartAvatar": "",
+       "counterpartCreditScore": 137,
+       "hasReviewedByMe": false,
+       "canConfirm": false,
+       "canReject": false,
+       "canCancel": true,
+       "canComplete": false,
+       "canReview": false,
+       "createdAt": "2026-10-17 12:20:15",
+       "completedAt": null,
+       "cancelledAt": null
+      },
+      {
+       "id": 1,
+       "orderNo": "SH20261016000001",
+       "type": "SALE",
+       "status": "COMPLETED",
+       "goodsId": 1,
+       "goodsTitle": "高等数学教材（第七版）",
+       "goodsCoverUrl": "/upload/202610/2a0204631fb84423b324734c2e14ffec.png",
+       "amount": 25,
+       "buyerId": 2,
+       "sellerId": 1,
+       "viewRole": "buyer",
+       "counterpartId": 1,
+       "counterpartNickname": "爱丽丝",
+       "counterpartAvatar": "",
+       "counterpartCreditScore": 137,
+       "hasReviewedByMe": false,
+       "canConfirm": false,
+       "canReject": false,
+       "canCancel": false,
+       "canComplete": false,
+       "canReview": true,
+       "createdAt": "2026-10-16 22:45:27",
+       "completedAt": "2026-10-16 22:47:35",
+       "cancelledAt": null
+      }
+     ],
+     "total": 2,
+     "pageNum": 1,
+     "pageSize": 10
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "bob 的举报列表",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "list": [
+      {
+       "id": 1,
+       "reporterId": null,
+       "targetType": "GOODS",
+       "targetId": 1,
+       "targetTitle": "高等数学教材（第七版）",
+       "reportType": "COUNTERFEIT",
+       "description": "疑似盗版教材，印刷模糊",
+       "images": [
+        "/upload/202610/114b924b52fe45be9047b4d149da48dc.png",
+        "/upload/202610/2a0204631fb84423b324734c2e14ffec.png"
+       ],
+       "status": 0,
+       "statusText": "待处理",
+       "result": null,
+       "handledAt": null,
+       "createdAt": "2026-10-16 09:03:01"
+      },
+      {
+       "id": 4,
+       "reporterId": null,
+       "targetType": "SWAP",
+       "targetId": 2,
+       "targetTitle": "键帽换鼠标",
+       "reportType": "VIOLATION",
+       "description": "交换物品描述违规",
+       "images": [],
+       "status": 1,
+       "statusText": "已处置",
+       "result": "已下架并警告发布者",
+       "handledAt": "2026-10-14 15:03:01",
+       "createdAt": "2026-10-13 15:03:01"
+      }
+     ],
+     "total": 2,
+     "pageNum": 1,
+     "pageSize": 10
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [],
+   "errors": [],
+   "ws": []
+  },
+  "B": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,9 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/dashboard" },
+  { "op": "wait", "ms": 2000 },
+  { "op": "url", "note": "must_change_password=1 的会话刷新后应被守卫拦回 /login" },
+  { "op": "toasts" },
+  { "op": "visible", "text": "管理后台登录" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/48-mustchange-reload-guard.png", "full": true },
+  { "op": "console" }
+]

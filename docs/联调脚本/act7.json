@@ -1,0 +1,39 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/login", "waitFor": { "testid": "admin-login-username" } },
+  { "op": "fill", "testid": "admin-login-username", "value": "superadmin" },
+  { "op": "fill", "testid": "admin-login-password", "value": "Admin@12345" },
+  { "op": "click", "role": "button", "name": "登 录", "after": 2500 },
+  { "op": "url" },
+  { "op": "visible", "text": "首次登录请先修改密码" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/20-gate-dialog.png" },
+
+  { "op": "press", "key": "Escape", "after": 600 },
+  { "op": "visible", "text": "首次登录请先修改密码", "note": "Esc 不可关闭" },
+  { "op": "url", "note": "应仍停留在 /login" },
+
+  { "op": "fill", "label": "原密码", "value": "Admin@12345" },
+  { "op": "fill", "label": "新密码", "value": "123" },
+  { "op": "fill", "label": "确认新密码", "value": "123" },
+  { "op": "click", "role": "button", "name": "确认修改", "after": 800 },
+  { "op": "bodyText", "max": 300 },
+
+  { "op": "fill", "label": "新密码", "value": "SuperAdmin@2026" },
+  { "op": "fill", "label": "确认新密码", "value": "SuperAdmin@2027" },
+  { "op": "click", "role": "button", "name": "确认修改", "after": 800 },
+  { "op": "bodyText", "max": 300 },
+
+  { "op": "fill", "label": "确认新密码", "value": "SuperAdmin@2026" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/21-gate-validation.png" },
+  { "op": "click", "role": "button", "name": "确认修改", "after": 2500 },
+  { "op": "toasts" },
+  { "op": "url" },
+  { "op": "waitFor", "text": "数据大屏" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/22-dashboard-after.png", "full": true },
+
+  { "op": "reload" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "url", "note": "刷新后应仍在 /dashboard（/auth/me 恢复会话）" },
+  { "op": "visible", "text": "数据大屏" },
+  { "op": "storage", "key": "campus_market_admin_token" },
+  { "op": "console" }
+]

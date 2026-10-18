@@ -1,0 +1,21 @@
+# 集成测试配置（Testcontainers）：datasource 由 @ServiceConnection 注入，此处只补静态项
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never   # 灌库由 AbstractMysqlIntegrationTest 用 ScriptUtils 执行项目根 sql/schema.sql（避免双份 schema 漂移）
+  data:
+    redis:
+      host: localhost
+      port: 6379    # RedisService 在集成测试中被 @MockitoBean 替换，不真实连接
+
+app:
+  jwt:
+    secret: test-only-secret-key-0123456789abcdef   # ≥32 字符，仅测试
+  demo-mode: true
+
+logging:
+  level:
+    com.campus.market: info
+    org.testcontainers: info

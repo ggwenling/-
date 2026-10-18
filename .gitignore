@@ -1,0 +1,53 @@
+# ═══════════ 依赖与构建产物 ═══════════
+node_modules/
+dist/
+dist-admin/
+*.local
+
+# Java / Maven
+backend/target/
+*.class
+*.jar
+
+# ═══════════ 运行时数据 ═══════════
+# 本地图片上传目录不入版本库（保留说明文件）
+backend/upload/*
+!backend/upload/README.md
+
+# ═══════════ 日志与临时文件 ═══════════
+*.log
+logs/
+.buildtmp/
+.workbuddy/
+
+# ═══════════ 环境与密钥 ═══════════
+.env
+.env.*
+!.env.development.example
+application-local.yml
+
+# ═══════════ 测试残留 / 联调产物 ═══════════
+# 联调剧本 *.json 保留，运行报告 out*.json / rep*.json 不入库
+docs/联调脚本/**/out*.json
+docs/联调脚本/**/rep*.json
+
+# 验收截图（体积大，不入库；验收记录文档以文字为准）
+gui-test-screenshots/
+
+# ═══════════ 整体排除的目录 ═══════════
+# 旧 Vue 前台（已被 frontend-web-react 替代；历史保留在 github.com/ggwenling/campus-secondhand-web-vue）
+frontend-web/
+# 退役旧 Vue 管理后台（已被 frontend-admin React 版替代；回滚方式见其 README-ARCHIVE.md）
+frontend-admin-vue-archive/
+
+# ═══════════ IDE 与工具缓存 ═══════════
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+.zcode/
+.codebuddy/
+
+# 操作系统
+desktop.ini

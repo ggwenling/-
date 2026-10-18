@@ -1,0 +1,27 @@
+# ---- Java / Maven ----
+target/
+*.class
+*.jar
+
+# ---- 运行时数据 ----
+# 本地图片存储目录不入版本库，仅保留说明文件
+upload/*
+!upload/README.md
+logs/
+*.log
+
+# ---- 环境与密钥 ----
+.env
+.env.*
+application-local.yml
+
+# ---- IDE ----
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# ---- E2E 脚本残留防护（验证请求体一律写系统临时目录，不得落工程目录） ----
+/*.json
+/src/main/java/**/*.json
+ct.txt

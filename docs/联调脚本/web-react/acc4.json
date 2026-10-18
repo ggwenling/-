@@ -1,0 +1,21 @@
+[
+  { "op": "newPage", "name": "B", "url": "http://localhost:5173/login" },
+  { "op": "goto", "url": "http://localhost:5173/login", "waitFor": { "testid": "login-username" }, "page": "B" },
+  { "op": "eval", "js": "localStorage.clear(); sessionStorage.clear(); 'B cleared'", "page": "B" },
+  { "op": "reload", "page": "B" },
+  { "op": "wait", "ms": 1200, "page": "B" },
+  { "op": "eval", "js": "document.querySelectorAll('main [role=checkbox]')[1].click(); 'B agreed'", "page": "B" },
+  { "op": "fill", "testid": "login-username", "value": "stu_bob", "page": "B" },
+  { "op": "fill", "testid": "login-password", "value": "Passw0rd!", "page": "B" },
+  { "op": "click", "role": "button", "name": "登录", "exact": true, "after": 3000, "page": "B" },
+
+  { "op": "api", "method": "POST", "url": "/api/orders", "body": { "goodsId": 5 }, "page": "B", "note": "bob 首次下单「线性代数」" },
+  { "op": "api", "method": "POST", "url": "/api/orders", "body": { "goodsId": 5 }, "page": "B", "note": "§4.3 二次下单应被商品唯一锁定拒绝" },
+
+  { "op": "api", "method": "POST", "url": "/api/reports", "body": { "targetType": "GOODS", "targetId": 1, "reportType": "FRAUD", "description": "bob 举报商品 1" }, "page": "B", "note": "§8.2 首次举报他人商品应成功" },
+  { "op": "api", "method": "POST", "url": "/api/reports", "body": { "targetType": "GOODS", "targetId": 1, "reportType": "FRAUD", "description": "bob 重复举报商品 1" }, "page": "B", "note": "§8.2 同目标重复待处理工单应被拒" },
+
+  { "op": "api", "method": "GET", "url": "/api/orders?role=buyer&pageNum=1&pageSize=10", "page": "B", "note": "bob 的买入订单" },
+  { "op": "api", "method": "GET", "url": "/api/reports/my?pageNum=1&pageSize=10", "page": "B", "note": "bob 的举报列表" },
+  { "op": "console" }
+]

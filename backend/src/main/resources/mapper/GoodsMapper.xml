@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  商品列表/搜索动态 SQL（PRD GDS-03 列表筛选排序、GDS-04 ngram 全文搜索、GDS-07 教材检索）。
+  全文索引：goods.ft_title_desc(title, description) WITH PARSER ngram；
+  MATCH...AGAINST 走参数绑定（#{}），禁止拼接用户输入（PRD §9.2）。
+-->
+<mapper namespace="com.campus.market.mapper.GoodsMapper">
+
+    <select id="selectGoodsPage" resultType="com.campus.market.entity.Goods">
+        SELECT g.*
+        FROM goods g
+        <where>
+            g.status = 'ON_SALE'
+            <if test="q != null and q != ''">
+                AND MATCH(g.title, g.description) AGAINST(#{q} IN NATURAL LANGUAGE MODE)
+            </if>
+            <if test="categoryIds != null and categoryIds.size() > 0">
+                AND g.category_id IN
+                <foreach collection="categoryIds" item="cid" open="(" separator="," close=")">#{cid}</foreach>
+            </if>
+            <if test="conditionLevel != null">
+                AND g.condition_level = #{conditionLevel}
+            </if>
+            <if test="minPrice != null">
+                AND g.price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null">
+                AND g.price &lt;= #{maxPrice}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                AND g.course_name LIKE CONCAT('%', #{courseName}, '%')
+            </if>
+            <if test="isbn != null and isbn != ''">
+                AND g.isbn LIKE CONCAT('%', #{isbn}, '%')
+            </if>
+        </where>
+        <choose>
+            <when test="sort == 'priceAsc'">ORDER BY g.price ASC, g.id DESC</when>
+            <when test="sort == 'priceDesc'">ORDER BY g.price DESC, g.id DESC</when>
+            <when test="sort == 'hot'">ORDER BY g.heat_score DESC, g.view_count DESC, g.id DESC</when>
+            <otherwise>ORDER BY g.created_at DESC, g.id DESC</otherwise>
+        </choose>
+    </select>
+
+    <!-- 卖家摘要联查（GDS-05）：user 实体归 M1，此处仅只读投影展示字段 -->
+    <select id="selectSellerSummary" resultType="com.campus.market.vo.SellerVO">
+        SELECT id,
+               nickname,
+               avatar,
+               credit_score AS creditScore,
+               auth_status  AS authStatus
+        FROM user
+        WHERE id = #{userId}
+    </select>
+
+</mapper>

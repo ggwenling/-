@@ -1,0 +1,35 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/report", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "table" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/23-report-list.png", "full": true },
+
+  { "op": "clickRowBtn", "rowText": "疑似盗版教材", "btn": "详情", "after": 1300 },
+  { "op": "dialogText" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] img, [role=presentation] img, img')).map(i=>({src:(i.getAttribute('src')||'').slice(0,60), w:i.naturalWidth, h:i.naturalHeight}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/24-report-detail-images.png" },
+  { "op": "press", "key": "Escape", "after": 700 },
+
+  { "op": "clickRowBtn", "rowText": "收款后不发货", "btn": "处置", "after": 900 },
+  { "op": "dialogText" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] button[role=checkbox]')).map(b=>({checked:b.getAttribute('aria-checked'), disabled:b.disabled, label:(b.closest('label')||b.parentElement).innerText.trim().slice(0,20)}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/25-report-handle-user-target.png" },
+
+  { "op": "click", "sel": "[role=dialog] label:has-text('警告')", "after": 300 },
+  { "op": "click", "sel": "[role=dialog] label:has-text('扣信用分')", "after": 300 },
+  { "op": "dialogFill", "sel": "textarea", "value": "联调测试：核实欺诈属实，警告并扣分" },
+  { "op": "dialogBtn", "name": "确认处置", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,110))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/26-report-after-handle.png", "full": true },
+
+  { "op": "clickRowBtn", "rowText": "描述含联系方式", "btn": "驳回", "after": 900 },
+  { "op": "dialogText" },
+  { "op": "dialogBtn", "name": "继续", "after": 900 },
+  { "op": "dialogText" },
+  { "op": "dialogFill", "value": "联调测试：证据不足，驳回" },
+  { "op": "dialogBtn", "name": "确认驳回", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,110))" },
+  { "op": "console" }
+]

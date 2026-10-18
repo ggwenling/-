@@ -1,0 +1,47 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/operation", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "table" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>({text:tr.innerText.replace(/\\s+/g,' '), img:(tr.querySelector('img')||{}).naturalWidth}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/31-operation-banner.png", "full": true },
+
+  { "op": "click", "role": "button", "name": "新建轮播图", "after": 900 },
+  { "op": "upload", "sel": "[role=dialog] input[type=file]", "files": ["C:/Users/31180/AppData/Local/Temp/dsh-xtxSWA/upload-test.png"] },
+  { "op": "wait", "ms": 2500 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "({url: document.querySelector('[role=dialog] input[placeholder=\"或粘贴图片地址\"]').value, previewW: (document.querySelector('[role=dialog] img')||{}).naturalWidth})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/32-banner-upload.png" },
+  { "op": "dialogFill", "sel": "input >> nth=1", "value": "联调测试轮播" },
+  { "op": "dialogFill", "sel": "input >> nth=2", "value": "/goods/1" },
+  { "op": "dialogBtn", "name": "创建轮播图", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调测试轮播", "btn": "编辑", "after": 1000 },
+  { "op": "eval", "js": "({checked: document.querySelector('[role=dialog] [role=switch]').getAttribute('aria-checked')})" },
+  { "op": "click", "sel": "[role=dialog] [role=switch]", "after": 400 },
+  { "op": "dialogBtn", "name": "保存修改", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "tab", "name": "平台公告", "after": 1300 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+  { "op": "click", "role": "button", "name": "新建公告", "after": 900 },
+  { "op": "dialogFill", "sel": "input >> nth=0", "value": "联调测试公告" },
+  { "op": "dialogFill", "sel": "textarea", "value": "这是联调测试创建的公告内容。" },
+  { "op": "dialogBtn", "name": "创建公告", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试公告')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调测试公告", "btn": "发布", "after": 900 },
+  { "op": "dialogBtn", "name": "确认发布", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试公告')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调测试公告", "btn": "下线", "after": 900 },
+  { "op": "dialogBtn", "name": "确认下线", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试公告')).map(tr=>tr.innerText.replace(/\\s+/g,' ') + ' || buttons=' + Array.from(tr.querySelectorAll('button')).map(b=>b.innerText.trim()).join(','))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/33-notice-flow.png", "full": true },
+  { "op": "console" }
+]

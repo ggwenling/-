@@ -1,0 +1,50 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/login", "waitFor": { "testid": "admin-login-username" } },
+  { "op": "fill", "testid": "admin-login-username", "value": "superadmin" },
+  { "op": "fill", "testid": "admin-login-password", "value": "SuperAdmin@2026" },
+  { "op": "click", "role": "button", "name": "登 录", "after": 2500 },
+  { "op": "url" },
+
+  { "op": "goto", "url": "http://localhost:5174/dashboard" },
+  { "op": "wait", "ms": 1800 },
+  { "op": "eval", "js": "({route:'/dashboard', h1: (document.querySelector('h1')||{}).innerText, cards: document.querySelectorAll('.dashed-card').length, svg: document.querySelectorAll('svg.recharts-surface').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/content" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/content', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/report" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/report', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/user" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/user', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/category" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/category', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/operation" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/operation', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/sensitive-word" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/sensitive-word', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/log" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/log', rows: document.querySelectorAll('table tbody tr').length})" },
+
+  { "op": "goto", "url": "http://localhost:5174/admin" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "eval", "js": "({route:'/admin', rows: document.querySelectorAll('table tbody tr').length})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/50-final-admin-page.png", "full": true },
+
+  { "op": "goto", "url": "http://localhost:5174/not-exist-route" },
+  { "op": "wait", "ms": 1600 },
+  { "op": "url" },
+  { "op": "bodyText", "max": 200 },
+  { "op": "console" }
+]

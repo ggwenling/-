@@ -1,0 +1,41 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/category", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).slice(0,4).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/27-category-after.png", "full": true },
+
+  { "op": "click", "role": "button", "name": "新建分类", "after": 800 },
+  { "op": "dialogFill", "sel": "input >> nth=0", "value": "联调测试分类" },
+  { "op": "pickOption", "trigger": "[role=dialog] [role=combobox]", "name": "数码电子", "after": 400 },
+  { "op": "dialogFill", "sel": "input[type=number]", "value": "99" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/28-category-create-dialog.png" },
+  { "op": "dialogBtn", "name": "创建分类", "after": 1800 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试分类')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调测试分类", "btn": "编辑", "after": 900 },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('[role=dialog] [role=switch]')).map(s=>({checked:s.getAttribute('aria-checked'), label:s.closest('div').parentElement.innerText.replace(/\\s+/g,' ').slice(0,40)}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/29-category-edit-switch-on.png" },
+  { "op": "click", "sel": "[role=dialog] [role=switch]", "after": 400 },
+  { "op": "eval", "js": "document.querySelector('[role=dialog] [role=switch]').getAttribute('aria-checked')" },
+  { "op": "dialogBtn", "name": "保存修改", "after": 1800 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试分类')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "clickRowBtn", "rowText": "联调测试分类", "btn": "编辑", "after": 900 },
+  { "op": "click", "sel": "[role=dialog] [role=switch]", "after": 400 },
+  { "op": "dialogBtn", "name": "保存修改", "after": 1800 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).filter(tr=>tr.innerText.includes('联调测试分类')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+
+  { "op": "tab", "name": "标签管理", "after": 1300 },
+  { "op": "bodyText", "max": 400 },
+  { "op": "click", "role": "button", "name": "新建标签", "after": 800 },
+  { "op": "dialogFill", "sel": "input >> nth=0", "value": "联调标签" },
+  { "op": "dialogFill", "sel": "input[type=number]", "value": "5" },
+  { "op": "dialogBtn", "name": "创建标签", "after": 1800 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' '))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/30-tag-created.png", "full": true },
+  { "op": "console" }
+]

@@ -1,0 +1,42 @@
+[
+  { "op": "goto", "url": "http://localhost:5173/want/1" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "eval", "js": "({aView: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').match(/我的操作[^]{0,60}/)?.[0], status: document.body.innerText.includes('求购中') ? 'OPEN' : 'not-open'})" },
+
+  { "op": "newPage", "name": "B", "url": "http://localhost:5173/login" },
+  { "op": "goto", "url": "http://localhost:5173/login", "waitFor": { "testid": "login-username" }, "page": "B" },
+  { "op": "eval", "js": "localStorage.clear(); sessionStorage.clear(); 'B cleared'", "page": "B" },
+  { "op": "reload", "page": "B" },
+  { "op": "wait", "ms": 1200, "page": "B" },
+  { "op": "eval", "js": "document.querySelectorAll('main [role=checkbox]')[1].click(); 'B agreed'", "page": "B" },
+  { "op": "fill", "testid": "login-username", "value": "stu_bob", "page": "B" },
+  { "op": "fill", "testid": "login-password", "value": "Passw0rd!", "page": "B" },
+  { "op": "click", "role": "button", "name": "登录", "exact": true, "after": 3000, "page": "B" },
+
+  { "op": "goto", "url": "http://localhost:5173/want/1", "page": "B" },
+  { "op": "wait", "ms": 2500, "page": "B" },
+  { "op": "eval", "js": "({bAction: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').match(/我的操作[^]{0,80}/)?.[0]})", "page": "B" },
+  { "op": "click", "role": "button", "name": "我要应约", "exact": true, "after": 1200, "page": "B" },
+  { "op": "eval", "js": "(document.querySelector('[role=dialog]')||{}).innerText?.replace(/\\s+/g,' ').slice(0,80)", "page": "B" },
+  { "op": "fill", "sel": "#offerPrice", "value": "1800", "page": "B" },
+  { "op": "fill", "sel": "#offerMessage", "value": "可当天下午在图书馆门口面交，显示器无坏点。", "page": "B" },
+  { "op": "click", "role": "button", "name": "提交应约", "exact": true, "after": 3000, "page": "B" },
+  { "op": "eval", "js": "({toast: Array.from(document.querySelectorAll('[data-sonner-toast]')).map(t=>t.innerText.trim()), myOffer: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').match(/我的报价[^]{0,50}/)?.[0]})", "page": "B" },
+  { "op": "api", "method": "POST", "url": "/api/want-posts/1/offers", "body": { "price": 1700, "message": "重复应约探针" }, "page": "B", "note": "§5.3 一帖一条待处理应约 → 40915" },
+
+  { "op": "reload" },
+  { "op": "wait", "ms": 2500 },
+  { "op": "eval", "js": "({offersHeader: (document.querySelector('main')||{}).innerText?.match(/收到的应约（\\d+）/)?.[0], rows: Array.from(document.querySelectorAll('tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,70))})" },
+
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/140-want-owner-offers.png", "full": true },
+  { "op": "click", "role": "button", "name": "接受", "exact": true, "after": 900 },
+  { "op": "eval", "js": "(document.querySelector('[role=alertdialog]')||{}).innerText?.replace(/\\s+/g,' ').slice(0,140)" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/141-want-accept-confirm.png", "full": false },
+  { "op": "click", "role": "button", "name": "接受并生成订单", "exact": true, "after": 3500 },
+  { "op": "eval", "js": "({toast: Array.from(document.querySelectorAll('[data-sonner-toast]')).map(t=>t.innerText.trim()), postStatus: document.body.innerText.includes('已成交') ? 'DEALT' : 'unknown', rows: Array.from(document.querySelectorAll('tbody tr')).map(tr=>tr.innerText.replace(/\\s+/g,' ').slice(0,70)), ownerBtns: Array.from(document.querySelectorAll('button')).map(b=>b.innerText.trim()).filter(t=>['编辑','关闭求购','删除'].includes(t))})" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/142-want-dealt.png", "full": true },
+
+  { "op": "api", "method": "GET", "url": "/api/orders?role=seller&pageNum=1&pageSize=10", "note": "§5.5 接受后应生成 PURCHASE 订单" },
+  { "op": "api", "method": "POST", "url": "/api/want-posts/1/offers", "body": { "price": 1500, "message": "已成交后再应约" }, "page": "B", "note": "§5.7 关闭/成交后禁止新增应约 → 40909" },
+  { "op": "console" }
+]

@@ -1,0 +1,320 @@
+{
+ "finalUrl": "http://localhost:5173/want/1",
+ "pages": [
+  "A",
+  "B"
+ ],
+ "steps": [
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "aView": "我的操作 这是你自己发布的求购帖，不能应约 收到的应约（0） 编辑 关闭求购 删除 还没有收到应约，试试分享给同学",
+    "status": "not-open"
+   },
+   "ok": true
+  },
+  {
+   "op": "newPage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "bAction": "我的操作 填写你的报价和留言，求购者会选择一条应约成交。 我要应约"
+   },
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "提交应约 报价 元 留言 取消 提交应约 关闭",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "toast": [
+     "应约已提交，等待求购者处理"
+    ],
+    "myOffer": "我的报价 ¥1,800.00 状态 待处理 留言 可当天下午在图书馆门口面交，显示器无坏点。 撤回应约"
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§5.3 一帖一条待处理应约 → 40915",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40915,
+    "message": "您已提交过应约，请等待对方处理",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "offersHeader": "收到的应约（1）",
+    "rows": [
+     "鲍 鲍勃 ¥1,800.00 可当天下午在图书馆门口面交，显示器无坏点。 待处理 接受 拒绝"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\140-want-owner-offers.png",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "接受应约 接受「鲍勃」的报价 ¥1800.00？接受后将生成订单，其余应约自动关闭。 取消 接受并生成订单",
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\141-want-accept-confirm.png",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/want/1",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "toast": [
+     "已接受，订单已生成，请到订单详情查看"
+    ],
+    "postStatus": "DEALT",
+    "rows": [
+     "鲍 鲍勃 ¥1,800.00 可当天下午在图书馆门口面交，显示器无坏点。 已接受 查看订单"
+    ],
+    "ownerBtns": []
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\142-want-dealt.png",
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§5.5 接受后应生成 PURCHASE 订单",
+   "value": {
+    "status": 200,
+    "code": 0,
+    "message": "成功",
+    "data": {
+     "list": [
+      {
+       "id": 1,
+       "orderNo": "SH20261016000001",
+       "type": "SALE",
+       "status": "COMPLETED",
+       "goodsId": 1,
+       "goodsTitle": "高等数学教材（第七版）",
+       "goodsCoverUrl": "/upload/202610/2a0204631fb84423b324734c2e14ffec.png",
+       "amount": 25,
+       "buyerId": 2,
+       "sellerId": 1,
+       "viewRole": "seller",
+       "counterpartId": 2,
+       "counterpartNickname": "鲍勃",
+       "counterpartAvatar": null,
+       "counterpartCreditScore": 80,
+       "hasReviewedByMe": true,
+       "canConfirm": false,
+       "canReject": false,
+       "canCancel": false,
+       "canComplete": false,
+       "canReview": false,
+       "createdAt": "2026-10-16 22:45:27",
+       "completedAt": "2026-10-16 22:47:35",
+       "cancelledAt": null
+      }
+     ],
+     "total": 1,
+     "pageNum": 1,
+     "pageSize": 10
+    }
+   },
+   "ok": true
+  },
+  {
+   "op": "api",
+   "note": "§5.7 关闭/成交后禁止新增应约 → 40909",
+   "page": "B",
+   "value": {
+    "status": 200,
+    "code": 40909,
+    "message": "求购帖已关闭或已成交，无法应约",
+    "data": null
+   },
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  },
+  "B": {
+   "console": [],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    }
+   ]
+  }
+ }
+}

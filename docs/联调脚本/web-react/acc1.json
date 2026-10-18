@@ -1,0 +1,52 @@
+[
+  { "op": "newPage", "name": "B", "url": "http://localhost:5173/login" },
+
+  { "op": "goto", "url": "http://localhost:5173/login", "waitFor": { "testid": "login-username" } },
+  { "op": "eval", "js": "localStorage.clear(); sessionStorage.clear(); 'A cleared'" },
+  { "op": "reload" },
+  { "op": "wait", "ms": 1200 },
+  { "op": "eval", "js": "document.querySelectorAll('main [role=checkbox]')[1].click(); 'A agreed'" },
+  { "op": "fill", "testid": "login-username", "value": "stu_alice" },
+  { "op": "fill", "testid": "login-password", "value": "Passw0rd!" },
+  { "op": "click", "role": "button", "name": "登录", "exact": true, "after": 3000 },
+  { "op": "eval", "js": "({aLoggedIn: !!localStorage.getItem('campus_market_token'), nick: document.body.innerText.match(/爱丽丝|鲍勃/)?.[0]})" },
+
+  { "op": "goto", "url": "http://localhost:5173/login", "waitFor": { "testid": "login-username" }, "page": "B" },
+  { "op": "eval", "js": "localStorage.clear(); sessionStorage.clear(); 'B cleared'", "page": "B" },
+  { "op": "reload", "page": "B" },
+  { "op": "wait", "ms": 1200, "page": "B" },
+  { "op": "eval", "js": "document.querySelectorAll('main [role=checkbox]')[1].click(); 'B agreed'", "page": "B" },
+  { "op": "fill", "testid": "login-username", "value": "stu_bob", "page": "B" },
+  { "op": "fill", "testid": "login-password", "value": "Passw0rd!", "page": "B" },
+  { "op": "click", "role": "button", "name": "登录", "exact": true, "after": 3000, "page": "B" },
+  { "op": "eval", "js": "({bLoggedIn: !!localStorage.getItem('campus_market_token'), whoami: document.body.innerText.match(/爱丽丝|鲍勃/)?.[0]})", "page": "B" },
+
+  { "op": "goto", "url": "http://localhost:5173/message", "page": "B" },
+  { "op": "wait", "ms": 3000, "page": "B" },
+  { "op": "eval", "js": "({bOnMessagePage: location.pathname, convCount: document.querySelectorAll('aside button').length})", "page": "B" },
+
+  { "op": "goto", "url": "http://localhost:5173/message?peerUserId=2&goodsId=1" },
+  { "op": "wait", "ms": 3500 },
+  { "op": "eval", "js": "({aHeader: (document.querySelector('header')||{}).innerText?.replace(/\\s+/g,' '), pending: (document.querySelector('footer')||{}).innerText?.includes('作为卡片发送')})" },
+
+  { "op": "fill", "sel": "textarea", "value": "实时测试：这条消息应被对方窗口无刷新收到" },
+  { "op": "press", "key": "Enter", "after": 2500 },
+  { "op": "eval", "js": "({aBubble: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').match(/实时测试[^]{0,30}/)?.[0], readLabel: Array.from(document.querySelectorAll('span')).map(s=>s.innerText.trim()).filter(t=>t==='未读'||t==='已读')})" },
+
+  { "op": "wait", "ms": 2500, "page": "B" },
+  { "op": "eval", "js": "({bConvList: (document.querySelector('aside')||{}).innerText?.replace(/\\s+/g,' ').slice(0,120), bUnreadBadge: document.querySelectorAll('aside span.bg-destructive').length, bPreview: (document.querySelector('aside')||{}).innerText?.includes('实时测试')})", "page": "B", "note": "B 未刷新，会话应经 WS 推送后自动出现" },
+
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('aside button')).find(b=>b.innerText.includes('爱丽丝'))?.click(); 'B opened conv'", "page": "B" },
+  { "op": "wait", "ms": 3000, "page": "B" },
+  { "op": "eval", "js": "({bSeesMsg: (document.querySelector('main')||{}).innerText?.includes('实时测试'), bChat: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').slice(0,140)})", "page": "B" },
+
+  { "op": "wait", "ms": 3000 },
+  { "op": "eval", "js": "({aReadAfterReceipt: Array.from(document.querySelectorAll('span')).map(s=>s.innerText.trim()).filter(t=>t==='已读'||t==='未读')})", "note": "B 打开会话后，A 端应通过 CHAT_READ 收到已读回执" },
+
+  { "op": "click", "role": "button", "name": "作为卡片发送", "exact": true, "after": 3000 },
+  { "op": "wait", "ms": 2500, "page": "B" },
+  { "op": "eval", "js": "({bCardBubble: (document.querySelector('main')||{}).innerText?.replace(/\\s+/g,' ').match(/高等数学[^]{0,40}/)?.[0], bHasCard: !!Array.from(document.querySelectorAll('main button')).find(b=>b.innerText.includes('¥25'))})", "page": "B", "note": "§7.4 商品卡片消息实时到达" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/130-ws-realtime-bob.png", "full": true, "page": "B" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/web-react/131-ws-realtime-alice.png", "full": true },
+  { "op": "console" }
+]

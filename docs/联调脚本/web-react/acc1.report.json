@@ -1,0 +1,345 @@
+{
+ "finalUrl": "http://localhost:5173/message?peerUserId=2&goodsId=1",
+ "pages": [
+  "A",
+  "B"
+ ],
+ "steps": [
+  {
+   "op": "newPage",
+   "value": "B",
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "A cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": "A agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "aLoggedIn": true,
+    "nick": "爱丽丝"
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B cleared",
+   "ok": true
+  },
+  {
+   "op": "reload",
+   "page": "B",
+   "url": "http://localhost:5173/login",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B agreed",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "click",
+   "page": "B",
+   "url": "http://localhost:5173/home",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "bLoggedIn": true,
+    "whoami": "鲍勃"
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "page": "B",
+   "url": "http://localhost:5173/message",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "bOnMessagePage": "/message",
+    "convCount": 3
+   },
+   "ok": true
+  },
+  {
+   "op": "goto",
+   "url": "http://localhost:5173/message?peerUserId=2&goodsId=1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "aHeader": "闲 校园淘 让闲置回到校园 首页 商品 求购 交换 发布 爱丽丝",
+    "pending": true
+   },
+   "ok": true
+  },
+  {
+   "op": "fill",
+   "ok": true
+  },
+  {
+   "op": "press",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "value": {
+    "aBubble": "实时测试：这条消息应被对方窗口无刷新收到 鲍 鲍勃 高等数学教材（第",
+    "readLabel": [
+     "已读",
+     "已读",
+     "未读"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "B 未刷新，会话应经 WS 推送后自动出现",
+   "page": "B",
+   "value": {
+    "bConvList": "聊天 2 通知 6 爱 2 爱丽丝 刚刚 实时测试：这条消息应被对方窗口无刷新收到",
+    "bUnreadBadge": 3,
+    "bPreview": true
+   },
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": "B opened conv",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "page": "B",
+   "value": {
+    "bSeesMsg": true,
+    "bChat": "消息中心 聊天 通知 6 爱 爱丽丝 刚刚 实时测试：这条消息应被对方窗口无刷新收到 爱 爱丽丝 高等数学教材（第七版） ¥25 React 版消息中心联调：这条是文本消息 实时测试：这条消息应被对方窗口无刷新收到 高等数学教材（第七版） ¥25 实时测试：这条消息应被对方窗口无"
+   },
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "B 打开会话后，A 端应通过 CHAT_READ 收到已读回执",
+   "value": {
+    "aReadAfterReceipt": [
+     "已读",
+     "已读",
+     "已读"
+    ]
+   },
+   "ok": true
+  },
+  {
+   "op": "click",
+   "url": "http://localhost:5173/message?peerUserId=2&goodsId=1",
+   "ok": true
+  },
+  {
+   "op": "wait",
+   "page": "B",
+   "ok": true
+  },
+  {
+   "op": "eval",
+   "note": "§7.4 商品卡片消息实时到达",
+   "page": "B",
+   "value": {
+    "bCardBubble": "高等数学教材（第七版） 爱 爱丽丝 高等数学教材（第七版） ¥25 React 版消息中",
+    "bHasCard": true
+   },
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "page": "B",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\130-ws-realtime-bob.png",
+   "ok": true
+  },
+  {
+   "op": "shot",
+   "value": "D:\\毕设\\校园二手平台交易系统\\gui-test-screenshots\\web-react\\131-ws-realtime-alice.png",
+   "ok": true
+  },
+  {
+   "op": "console",
+   "ok": true
+  }
+ ],
+ "consoleErrors": [
+  "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0IjoxNzkyMjEwNjgzLCJleHAiOjE3OTIyMTc4ODN9.yom8dGiZZnJn-JTz4n3mpW3borW3pQZyvcOOEtj-d3o' failed: WebSocket is closed before the connection is established."
+ ],
+ "pageErrors": [],
+ "logsByPage": {
+  "A": {
+   "console": [
+    "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0IjoxNzkyMjEwNjgzLCJleHAiOjE3OTIyMTc4ODN9.yom8dGiZZnJn-JTz4n3mpW3borW3pQZyvcOOEtj-d3o' failed: WebSocket is closed before the connection is established."
+   ],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0Ij",
+     "closed": true,
+     "frames": 0,
+     "lastFrame": null
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVfYWxpY2UiLCJ0eXBlIjoiVVNFUiIsInR0IjoiYWNjZXNzIiwiaWF0Ij",
+     "closed": false,
+     "frames": 5,
+     "lastFrame": "{\"type\":\"CHAT_READ\",\"conversationId\":1,\"readerId\":2}"
+    }
+   ]
+  },
+  "B": {
+   "console": [
+    "warning: WebSocket connection to 'ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MTc5MjIxMDY4NywiZXhwIjoxNzkyMjE3ODg3fQ.lOh0OwlziqRWB5iLzeFKhcerniX81YQhLxyW_aIxuoE' failed: WebSocket is closed before the connection is established."
+   ],
+   "errors": [],
+   "ws": [
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/?token=6dj3uZehrgcr",
+     "closed": false,
+     "frames": 1,
+     "lastFrame": "{\"type\":\"connected\"}"
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MT",
+     "closed": true,
+     "frames": 0,
+     "lastFrame": null
+    },
+    {
+     "url": "ws://localhost:5173/ws?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJzdHVfYm9iIiwidHlwZSI6IlVTRVIiLCJ0dCI6ImFjY2VzcyIsImlhdCI6MT",
+     "closed": false,
+     "frames": 9,
+     "lastFrame": "{\"type\":\"CHAT_READ\",\"conversationId\":1,\"readerId\":1}"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,17 @@
+[
+  { "op": "goto", "url": "http://localhost:5174/operation", "waitFor": { "sel": "table tbody tr" } },
+  { "op": "wait", "ms": 900 },
+  { "op": "clickRowBtn", "rowText": "#2", "btn": "编辑", "after": 1100 },
+  { "op": "dialogText" },
+  { "op": "eval", "js": "({switch: document.querySelector('[role=dialog] [role=switch]').getAttribute('aria-checked'), urlValue: document.querySelector('[role=dialog] input[placeholder=\"或粘贴图片地址\"]').value})" },
+  { "op": "fill", "placeholder": "轮播标题（可选）", "value": "联调测试轮播" },
+  { "op": "fill", "placeholder": "例如 /goods/123（可选）", "value": "/goods/1" },
+  { "op": "click", "sel": "[role=dialog] [role=switch]", "after": 400 },
+  { "op": "eval", "js": "document.querySelector('[role=dialog] [role=switch]').getAttribute('aria-checked')" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/34-banner-edit.png" },
+  { "op": "dialogBtn", "name": "保存修改", "after": 2000 },
+  { "op": "toasts" },
+  { "op": "eval", "js": "Array.from(document.querySelectorAll('table tbody tr')).map(tr=>({text:tr.innerText.replace(/\\s+/g,' '), img:(tr.querySelector('img')||{}).naturalWidth}))" },
+  { "op": "shot", "path": "D:/毕设/校园二手平台交易系统/gui-test-screenshots/admin-react/35-operation-after.png", "full": true },
+  { "op": "console" }
+]

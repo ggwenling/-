@@ -1,0 +1,25 @@
+# 生产/部署环境配置：敏感项全部由环境变量提供，缺失即启动失败（fail-fast）
+spring:
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/campus_secondhand?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD}          # 必填：MySQL 密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+logging:
+  level:
+    com.campus.market: info
+
+app:
+  demo-mode: false         # 生产模式：验证码走真实 SMTP 发送
+  jwt:
+    secret: ${JWT_SECRET}  # 必填：≥32 字符随机串，不入库不入 Git（PRD §9.2）
